@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_app/screen/home.screen.dart';
+// import 'package:flutter_app/screen/home.screen.dart';
 import 'package:flutter_app/screen/test.screen.dart';
 
 void main() {
@@ -16,8 +16,8 @@ class MyApp extends StatelessWidget {
         primarySwatch: Colors.blueGrey,
       ),
       // home: MyHomePage(title: 'test title',),
-      home: HomeScreen(),
-      // home: TestScreen()
+      // home: HomeScreen(),
+      home: TestScreen()
     );
   }
 }
