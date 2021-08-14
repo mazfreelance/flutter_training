@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_app/model/task.model.dart';
 
-class HomeScreen extends StatefulWidget {
+class TaskListScreen extends StatefulWidget {
   @override
-  _HomeScreenState createState() => _HomeScreenState();
+  _TaskListScreenState createState() => _TaskListScreenState();
 }
 
-class _HomeScreenState extends State<HomeScreen> {
+class _TaskListScreenState extends State<TaskListScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(

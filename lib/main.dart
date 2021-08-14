@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_app/providers/task-list.provider.dart';
 // import 'package:flutter_app/screen/home.screen.dart';
-import 'package:flutter_app/screen/test.screen.dart';
+import 'package:flutter_app/screen/home.screen.dart';
+import 'package:provider/provider.dart';
 
 void main() {
   runApp(MyApp());
@@ -10,14 +12,18 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Flutter Demo',
-      theme: ThemeData(
-        primarySwatch: Colors.blueGrey,
+    return MultiProvider(
+      providers: [
+        ChangeNotifierProvider<TaskListProvider>.value(value: TaskListProvider()),
+      ],
+      child: MaterialApp(
+        title: 'Flutter Demo',
+        theme: ThemeData(
+          primarySwatch: Colors.purple,
+        ),
+        // home: MyHomePage(title: 'test title',),
+        home: HomeScreen()
       ),
-      // home: MyHomePage(title: 'test title',),
-      // home: HomeScreen(),
-      home: TestScreen()
     );
   }
 }
