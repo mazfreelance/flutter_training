@@ -8,6 +8,8 @@ class HomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Material(
+      color: Colors.amberAccent,
+      shadowColor: Colors.deepPurpleAccent[900],
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
@@ -21,6 +23,14 @@ class HomeScreen extends StatelessWidget {
               );
             },
             child: Text('Task List'),
+            style: ButtonStyle(
+              shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+                RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(18.0),
+                  side: BorderSide(color: Colors.red),
+                ),
+              ),
+            ),
           ),
           ElevatedButton(
             onPressed: () {
@@ -32,7 +42,15 @@ class HomeScreen extends StatelessWidget {
               );
             },
             child: Text('Login'),
-          )
+            style: ButtonStyle(
+              shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+                RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(18.0),
+                  side: BorderSide(color: Colors.red),
+                ),
+              ),
+            ),
+          ),
         ],
       ),
     );

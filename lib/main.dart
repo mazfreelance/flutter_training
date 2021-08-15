@@ -1,29 +1,42 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_app/providers/task-list.provider.dart';
-// import 'package:flutter_app/screen/home.screen.dart';
 import 'package:flutter_app/screen/home.screen.dart';
+import 'package:get_storage/get_storage.dart';
 import 'package:provider/provider.dart';
 
-void main() {
+import 'model/task.model.dart';
+
+void main() async {
+  await GetStorage.init(); // init get storage plugin
   runApp(MyApp());
 }
 
 class MyApp extends StatelessWidget {
+  final box = GetStorage();
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
+    // if have get storage plugin
+    // read exist data
+    final taskList = box.read('taskList');
+    final List<Task> list = taskList != null
+        ? List.from((taskList as List<dynamic>).map((e) => Task.fromMap(e)))
+        : [];
+    final taskListProvider = TaskListProvider(taskList: list);
+
+    // if dont have get storage plugin
+    // final taskListProvider = TaskListProvider();
     return MultiProvider(
       providers: [
-        ChangeNotifierProvider<TaskListProvider>.value(value: TaskListProvider()),
+        ChangeNotifierProvider<TaskListProvider>.value(value: taskListProvider),
       ],
       child: MaterialApp(
-        title: 'Flutter Demo',
-        theme: ThemeData(
-          primarySwatch: Colors.purple,
-        ),
-        // home: MyHomePage(title: 'test title',),
-        home: HomeScreen()
-      ),
+          title: 'Flutter Demo',
+          theme: ThemeData(
+            primarySwatch: Colors.purple,
+          ),
+          // home: MyHomePage(title: 'test title',),
+          home: HomeScreen()),
     );
   }
 }
@@ -56,7 +69,7 @@ class _MyHomePageState extends State<MyHomePage> {
     // fast, so that you can just rebuild anything that needs updating rather
     // than having to individually change instances of widgets.
 
-    // Scaffold , Material 
+    // Scaffold , Material
     return Scaffold(
       appBar: AppBar(
         // Here we take the value from the MyHomePage object that was created by
@@ -83,16 +96,11 @@ class _MyHomePageState extends State<MyHomePage> {
           // horizontal).
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
-            Text(
-              'You have pushed the button this many times:',
-              style: TextStyle(color: Colors.amber, fontSize: 30)
-            ),
-            Text(
-              '$_counter',
-              // style: Theme.of(context).textTheme.headline4,
-              style: TextStyle(color: Colors.green, fontSize: 30)
-
-            ),
+            Text('You have pushed the button this many times:',
+                style: TextStyle(color: Colors.amber, fontSize: 30)),
+            Text('$_counter',
+                // style: Theme.of(context).textTheme.headline4,
+                style: TextStyle(color: Colors.green, fontSize: 30)),
           ],
         ),
       ),
