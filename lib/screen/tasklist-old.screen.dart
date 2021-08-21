@@ -124,6 +124,7 @@ class _TaskContainerState extends State<TaskContainer> {
   }
 }
 
+// ignore: must_be_immutable
 class CustomText extends InheritedWidget {
   final Widget child;
   String text;
